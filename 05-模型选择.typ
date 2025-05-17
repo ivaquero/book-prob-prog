@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "模型选择",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = 后验预测检查
@@ -14,7 +11,6 @@
 #figure(
   image("images/bbap/bap-05-polyfit.png", width: 40%),
   caption: "直线拟合 vs. 曲线拟合",
-  supplement: "图",
 )
 
 下图显示了数据以及线性和二次方模型的均值和四分位范围（IQR）。此前，我们对每个模型的后验预测样本进行平均。可以看到，两个模型的均值重现得很好，IQR 也不是很偏。于这两组数据，我们计算出一个汇总统计量（在本例中为均值或 IQR），然后计算出模拟数据的汇总统计量等于或大于数据的比例（即 p 值），相应的公式为
@@ -30,7 +26,6 @@ $ "p-value" ≜ p(T_("sim") > T_("obs")|y) $
 #figure(
   image("images/bbap/bap-05-mean-iqr.png", width: 60%),
   caption: "p 值",
-  supplement: "图",
 )
 
 实际上，Bayes 的 p 值基本上和频率主义一样，但只是得到一个度量后验预测拟合度的数字的方法。即，得到的模拟统计量$T_("sim")$的概率等于或比数据中的统计量$T_("obs")$更极端。
@@ -50,7 +45,6 @@ $ "p-value" ≜ p(T_("sim") > T_("obs")|y) $
 #figure(
   image("images/bbap/bap-05-occam.png", width: 40%),
   caption: "Occam 剃刀",
-  supplement: "图",
 )
 
 == 拟合程度
@@ -146,7 +140,6 @@ $
 #figure(
   image("images/bbap/bap-05-plot-compare.png", width: 40%),
   caption: "WAIC 比较图",
-  supplement: "图",
 )
 
 图中
@@ -184,7 +177,6 @@ $ max_n 1 / n ∑ log ∑_(k=1)^k w_k p(y_i|y_(-i), M_k) $
 #figure(
   image("images/bbap/bap-05-model-avg.png", width: 40%),
   caption: "模型平均 KDE",
-  supplement: "图",
 )
 
 = Bayes 因子
@@ -204,7 +196,7 @@ $ "BF" = frac(p(y|M_0), p(y|M_1)) $
 
 #let data = csv("data/msr-bf.csv")
 #figure(
-  ktable(data, 2),
+  tableq(data, 2),
   caption: "BF vs. 证据的强度",
   supplement: "表",
   kind: table,
@@ -327,12 +319,10 @@ $
   figure(
     image("images/distrs/distr_laplace_pdf.png", width: 90%),
     caption: "PDF",
-    supplement: "图",
   ),
   figure(
     image("images/distrs/distr_laplace_cdf.png", width: 90%),
     caption: "CDF",
-    supplement: "图",
   ),
   columns: (200pt,) * 2,
   gutter: 2pt,

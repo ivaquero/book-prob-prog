@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "概率编程简介",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = 概率编程
@@ -94,7 +91,6 @@ $ p(θ|y) ∼ "Beta"(α_"prior" + y, β_"prior" + N - y) $
     width: 60%,
   ),
   caption: "Beta 分布后验",
-  supplement: "图",
 )
 
 - 均匀分布的先验（蓝），代表了对后验一无所知，即所有可能的偏差值是同等可能的先验
@@ -115,7 +111,6 @@ $ p(θ|y) ∼ "Beta"(α_"prior" + y, β_"prior" + N - y) $
 #figure(
   image("images/bbap/bap-01-coin-hdi.png", width: 40%),
   caption: "HPD",
-  supplement: "图",
 )
 
 #warning[
@@ -163,7 +158,6 @@ with pm.Model() as coin_flip:
 #figure(
   image("images/bbap/bap-02-coin-trace.png", width: 100%),
   caption: "plot_trace()",
-  supplement: "图",
 )
 
 使用 #raw("az.plot_trace(idata_coin, kind=\"rank_bars\", combined=True)", lang: "python", block: false) 可得到一个排序图（rank plot），这是检查样本可信度的另一种方法，我们为每个链获取一个直方图，并希望所有直方图尽可能均匀。当均匀性出现较大偏差则表明链正在探索后验的不同区域。理想情况下，我们希望所有链都能探索整个后验。
@@ -171,14 +165,13 @@ with pm.Model() as coin_flip:
 #figure(
   image("images/bbap/bap-02-coin-trace-rank.png", width: 100%),
   caption: "plot_trace(kind=\"rank_bars\")",
-  supplement: "图",
 )
 
 通过 #raw("az.summary(idata, kind=\"stats\").round(2)", lang: "python", block: false) 可以得到得到均值、标准差和 94% 的 HDI，这里使用 94% 是因为这是对 95% 值的任意性友好剩余。可通过向参数 `hdi_prob` 传递一个不同的值来改变这个值。
 
 #let csv1 = csv("python/bap-02-coin.csv")
 #figure(
-  ktable(csv1, 5, inset: 0.31em),
+  tableq(csv1, 5, inset: 0.31em),
   caption: "后验描述",
   supplement: "表",
   kind: table,
@@ -214,7 +207,6 @@ ROPE 的定义是取决于上下文的，决定向来是主观的，我们的任
     width: 80%,
   ),
   caption: "评估后验",
-  supplement: "图",
 ) <coin-post>
 
 == Savage-Dickey 密度比
@@ -228,14 +220,13 @@ az.plot_bf(idata_coin, ref_val=0.5, var_name="θ", prior=np.random.uniform(0, 1,
 #figure(
   image("images/bbap/bap-02-coin-trace-bf.png", width: 40%),
   caption: "Savage-Dickey 密度比",
-  supplement: "图",
 ) <coin-bf>
 
 由@coin-bf，我们可以看到`BF_01 = 1.3`，这意味着`θ = 0.5`的值在后验分布下的可能性比在先验分布下的可能性高 1.3 倍。要计算这个值，我们只需将`θ = 0.5`处的后验高度除以`θ = 0.5`处的先验高度。`BF_10 = 1/1.3 ≈ 0.8`。我们可以将其视为`θ ≠ 0.5`的值在后验下的可能性比在先验下的可能性高 0.76 倍。Savage-Dickey 密度比是计算所谓贝叶斯因子的一种特殊方法 @kassBayesFactors1995，我们将在【模型选择】一章中详细谈论它。
 
 #let data = csv("data/bayes-factor.csv")
 #figure(
-  ktable(data, 2),
+  tableq(data, 2),
   caption: "Bayes 因子的表述",
   supplement: [表],
   kind: table,
@@ -285,7 +276,6 @@ for i in grid:
 #figure(
   image("images/bbap/bap-02-chem-box.png", width: 40%),
   caption: "化学位移",
-  supplement: "图",
 ) <box>\
 
 由于不知道均值或标准差，我们必须为它们设定先验。因此，一个合理的模型可能是：
@@ -311,7 +301,6 @@ with pm.Model() as model_g:
 #figure(
   image("images/bbap/bap-02-chem-pair.png", width: 40%),
   caption: none,
-  supplement: "图",
 )
 
 == 后验概率检查
@@ -327,7 +316,6 @@ $
 #figure(
   image("images/bbap/bap-02-chem-ppc.png", width: 40%),
   caption: none,
-  supplement: "图",
 ) <ppc>
 
 在@ppc 中，黑线是数据的 KDE，灰线是从 100 个后验预测样本中的每一个计算出的 KDE。灰线反映了我们对预测数据分布的不确定性。这些图看起来毛茸茸的或不稳定；当数据点很少时，就会发生这种情况。
@@ -345,4 +333,4 @@ $
 
 然而，从建模的角度来看，我们可以责怪模型并对其进行更改，而非责怪数据。一般来说，Bayesian 更喜欢使用不同的先验和可能性将假设直接编码到模型中，而非通过诸如异常值删除规则之类的临时启发式方法。简单说，Gaussian 模型可能并不适合一些实际问题，我们可以考虑使用其他模型，详见【线性回归】。
 
-#bibliography("data/prob.bib", style: "future-science")
+#bibliography("lib/prob.bib", style: "future-science")

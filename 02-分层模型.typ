@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "分层模型",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = 组间比较
@@ -20,7 +17,7 @@
 
 #let data = csv("data/tips.csv")
 #figure(
-  ktable(data.slice(0, 6), 7),
+  tableq(data.slice(0, 6), 7),
   caption: "tips 数据集",
   supplement: [表],
   kind: table,
@@ -41,7 +38,6 @@ idx = pd.Categorical(tips["day"], categories=categories).codes
 #figure(
   image("images/bbap/bap-03-tips-forest.png", width: 40%),
   caption: "tips 数据集森林图",
-  supplement: "图",
 )
 
 比照此前对 Gaussian 模型，将其中的参数变为向量。我们将指定两个坐标：`days`，其维度为`Thur`，`Fri`，`Sat`，`Sun`；以及`days_flat`，它将包含相同的标签，但根据与每个观察相对应的顺序和长度重复。`days_flat`稍后将有助于后验预测测试。
@@ -74,7 +70,6 @@ az.plot_ppc(
 #figure(
   image("images/bbap/bap-03-tips-ppc.png", width: 60%),
   caption: "tips 数据集后验概率检查",
-  supplement: "图",
 )
 
 现在，我们将认为该模型对我们来说已经足够好了，并开始探索后验。我们可用均值来解释结果，然后找出哪些日子的均值更高。但还有其他选择；我们可能希望使用一些受观众欢迎的效应大小测量方法，如 Cohen's d 或优越性概率。
@@ -109,7 +104,6 @@ $ "ps" = Φ(δ / sqrt(2)) $
 #figure(
   image("images/bbap/bap-03-tips-post.png", width: 60%),
   caption: "均值差、Cohen's d 和 优越性概率",
-  supplement: "图",
 ) <tips-post>
 
 解读@tips-post 的一种方法是将零差异的参考值与 HDI 间隔进行比较。只有一种情况是 94% HDI 排除了参考值，即周四和周日的小费差异。对于所有其他比较，我们不能排除差异为零的可能性，至少根据 HDI 参考值重叠标准。但即使在那种情况下，平均差异也约为 0.5 美元。正式地说，这需要定义一个损失函数，或者至少定义一些效应大小的阈值，来帮助我们做决策。
@@ -122,7 +116,6 @@ $ "ps" = Φ(δ / sqrt(2)) $
 #figure(
   image("models/model-groups.png", width: 60%),
   caption: "分层模型的三种建模方法",
-  supplement: "图",
 ) <groups> \
 
 分层模型是群体间共享信息的一种自然方式。在分层模型中，先验分布的参数本身被赋予先验分布。这些更高级别的先验通常称为超先验。拥有超先验允许模型在群体间共享信息，同时仍允许群体间存在差异。换句话说，我们可以将先验分布的参数视为属于一个共同的参数群体。@groups 显示了池化模型（单个组）、非池化模型（所有分离的组）和分层模型（也称为部分池化模型）之间的差异。
@@ -184,7 +177,6 @@ _axes[0].vlines(
 #figure(
   image("images/bbap/bap-03-chem-forest.png", width: 50%),
   caption: "蛋白质化学漂移的分层模型",
-  supplement: "图",
 ) <forest> \
 
 该图最相关的部分是，分层模型的估计值被拉向部分合并的均值，或者说，与未合并的估计值相比，它们缩小了。您还会注意到，对于那些远离均值的组（例如 PRO），这种影响更为明显，并且不确定性与非分层模型的不确定性相当或更小。估计值是部分合并的，因为我们对每个组都有一个估计值，但各个组的估计值通过超先验相互限制。因此，我们得到了一个中间情况，介于一个包含所有化学位移的组和 20 个独立组（每个氨基酸一个）之间。
@@ -195,7 +187,7 @@ _axes[0].vlines(
 
 #let data = csv("data/football_players.csv")
 #figure(
-  ktable(data.slice(0, 6), 4),
+  tableq(data.slice(0, 6), 4),
   caption: "足球运动员数据集",
   supplement: [表],
   kind: table,
@@ -237,7 +229,6 @@ with pm.Model(coords=coords_ball) as model_football:
 #figure(
   image("images/bbap/bap-03-football-post.png", width: 50%),
   caption: "进球的后验分布",
-  supplement: "图",
 ) <ball-post>
 
 @ball-forest 显示了参数$μ_p$的后验分布的森林图。正如我们已经看到的，前锋位置的后验分布以 0.13 为中心，是四个中最高的。$μ_p$的最低值是守门员位置。有趣的是不确定性非常高；这是因为我们的数据集中进球的守门员很少，准确地说是三个。后卫和中场位置的后验分布略居中，中场的后验分布略高。我们可以解释这一点，因为中场的主要作用是防守和进攻，因此进球的概率高于后卫，但低于前锋。
@@ -245,7 +236,6 @@ with pm.Model(coords=coords_ball) as model_football:
 #figure(
   image("images/bbap/bap-03-football-forest.png", width: 40%),
   caption: "进球的森林图",
-  supplement: "图",
 ) <ball-forest>
 
 = 因果推断
@@ -293,4 +283,4 @@ $
 
 $ Y ∼ X + B + C $
 
-#bibliography("data/prob.bib", style: "future-science")
+#bibliography("lib/prob.bib", style: "future-science")

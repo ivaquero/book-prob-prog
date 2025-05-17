@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "线性分类",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = 分类任务
@@ -59,7 +56,6 @@ $
 #figure(
   image("images/bbap/bap-04-iris-matrix.png", width: 60%),
   caption: "鸢尾",
-  supplement: "图",
 )
 
 现在，我们从最简单的分类问题开始，选取两个类别，`setosa ` 和 `versicolor`，以及一个特征，萼片长度。用数字$0$和$1$对两个类别变量编码。注意 2 个确定性变量：$θ$和 `bd`。$θ$是应用于$μ$变量的 sigmoid 函数的输出，`bd` 是决策边界，即用于分隔类的值。
@@ -83,7 +79,7 @@ with pm.Model() as model_lg:
 
 #let csv1 = csv("python/bap-04-iris-logreg.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "逻辑回归的系数",
   supplement: "表",
   kind: table,
@@ -94,7 +90,6 @@ with pm.Model() as model_lg:
 #figure(
   image("images/bbap/bap-04-iris-logreg-hdi.png", width: 40%),
   caption: "sigmoid 函数的决策边界",
-  supplement: "图",
 )
 
 这里的决策边界被定义为$x_i$的值，其中，$y = 0.5$，结果是$- α / β$，其推导如下。
@@ -147,12 +142,11 @@ with pm.Model() as model_rlg:
 #figure(
   image("images/bbap/bap-04-iris-logreg-t-hdi.png", width: 40%),
   caption: "sigmoid 函数的鲁棒决策边界",
-  supplement: "图",
 )
 
 #let csv1 = csv("python/bap-04-iris-logreg-t.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "鲁棒逻辑回归的系数",
   supplement: "表",
   kind: table,
@@ -189,7 +183,6 @@ with pm.Model() as model_1:
 #figure(
   image("images/bbap/bap-04-iris-logreg-multi.png", width: 40%),
   caption: "鸢尾的多元逻辑回归",
-  supplement: "图",
 )
 
 == 对系数的解释
@@ -219,14 +212,13 @@ $ log frac(p(y=1), 1 - p(y=1)) = α + X β $
 #figure(
   image("images/funcs/logit-odds.png", width: 40%),
   caption: "几率-对数几率",
-  supplement: "图",
 )
 
 故，总结提供的系数均是以对数几率为标准的。
 
 #let csv1 = csv("python/bap-04-iris-logreg-multi.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "多元逻辑回归的系数估计",
   supplement: "表",
   kind: table,
@@ -239,7 +231,6 @@ $ log frac(p(y=1), 1 - p(y=1)) = α + X β $
 #figure(
   image("images/bbap/bap-04-iris-corr.png", width: 40%),
   caption: "鸢尾萼片相关性",
-  supplement: "图",
 )
 
 处理相关的变量时，除了删除一些相关变量，还可以选择在先验中加入更多的信息。对弱信息先验，可以将所有非二元变量的均值缩放为 0，然后使用$t$分布
@@ -262,7 +253,6 @@ x_3 = iris_df[["sepal_length", "sepal_width"]].to_numpy()
 #figure(
   image("images/bbap/bap-04-iris-unbalanced.png", width: 40%),
   caption: "非平衡多元逻辑回归",
-  supplement: "图",
 )
 
 那么，当发现不平衡的数据，我们往往有如下选择
@@ -287,7 +277,6 @@ $
 #figure(
   image("images/bbap/bap-05-covmat.png", width: 65%),
   caption: "协方差矩阵",
-  supplement: "图",
 )
 
 在协方差矩阵的主对角元是每个变量的方差，矩阵中的其他元素是协方差（变量之间的方差），用$ρ$来表示。由于不知道协方差矩阵的值，我们必须使用先验，这里有 3 个选择
@@ -300,7 +289,7 @@ $
 
 #let csv1 = csv("python/bap-04-multireg-r2.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "多元线性回归的R²",
   supplement: "表",
   kind: table,
@@ -426,7 +415,7 @@ $ θ = e^((α + 𝑿 β)) $
 
 #let csv1 = csv("data/fish.csv")
 #figure(
-  ktable(csv1.slice(0, 5), 8, inset: 0.31em),
+  tableq(csv1.slice(0, 5), 8, inset: 0.31em),
   caption: "Fish 数据集",
   supplement: "表",
   kind: table,
@@ -454,7 +443,7 @@ with pm.Model() as ZIP_reg:
 
 #let csv1 = csv("python/bap-04-fish-zipreg.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "ZIP 回归系数",
   supplement: "表",
   kind: table,

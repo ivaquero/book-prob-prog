@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "线性回归",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = 简单线性回归
@@ -44,7 +41,6 @@ $ y ∼ 𝒩(α + x β, σ) $
 #figure(
   image("images/bbap/bap-04-bike.png", width: 45%),
   caption: "自行车租赁数据集",
-  supplement: "图",
 )
 
 ```python
@@ -68,7 +64,6 @@ az.plot_posterior(idata_lb, var_names=['~μ'])
 #figure(
   image("images/bbap/bap-04-bike-post.png", width: 60%),
   caption: "自行车租赁的后验分布",
-  supplement: "图",
 ) <bike-post>
 
 从@bike-post 中，我们可以看到$α$、$β$和$σ$的边际后验分布。若我们只读取每个分布的均值，例如$μ = 69 + 7.9X$，根据这些信息，我们可以说温度为 0 时租赁自行车的期望值为 69，并且对于每个温度度，租赁自行车的数量增加了7.9。因此，在 28 度的温度下，我们预计租用 69 + 7.9 ∗ 28 ≈ 278 辆自行车。这是我们的预期，但后验也告诉我们这一估计的不确定性。如，$β$ 的 94% HDI 为 (6.1, 9.7)，因此对于每度温度，租赁自行车的数量可能会从 6 辆增加到大约 10 辆。此外，即使我们忽略后验不确定性，只关注意味着，我们对租赁自行车的数量仍然存在不确定性，因为我们的$σ$值为 170。
@@ -109,7 +104,6 @@ for ax0 in axes0.flatten():
 #figure(
   image("images/bbap/bap-04-bike-lines.png", width: 60%),
   caption: "自行车租赁的线性模型",
-  supplement: "图",
 ) <bike-lines>\
 
 @bike-lines 传达了基本相同的信息，但一个将不确定性表示为一组线，另一个表示为阴影区域。请注意，若重复代码来生成绘图，您将得到不同的线，因为我们是从后验中采样的。然而，阴影区域将是相同的，因为我们正在使用所有可用的后验样本。
@@ -129,7 +123,6 @@ pm.sample_posterior_predictive(idata_lb, model=model_lb, extend_inferencedata=Tr
 #figure(
   image("images/bbap/bap-04-bike-pred.png", width: 45%),
   caption: "自行车租赁的后验预测",
-  supplement: "图",
 ) <bike-pred>
 
 ```python
@@ -192,7 +185,6 @@ with pm.Model() as model_neg:
 #figure(
   image("images/bbap/bap-04-bike-pred2.png", width: 45%),
   caption: "自行车租赁的后验预测改进",
-  supplement: "图",
 ) <bike-pred2>
 
 @bike-ppc 显示了左侧`model_lb`和右侧`model_neg`的后验预测检查。我们可以看到，当使用 Normal 时，最大的不匹配是模型预测的租赁自行车数量为负，但即使从积极的一面来看，我们也发现拟合度并不那么好。另一方面，NegativeBinomial 模型似乎更适合，尽管它并不完美。看右尾：预测比观察更重要。但还要注意的是，这种非常高的需求的概率很低。
@@ -200,7 +192,6 @@ with pm.Model() as model_neg:
 #figure(
   image("images/bbap/bap-04-bike-ppc.png", width: 60%),
   caption: "自行车租赁的两个模型的后验预测检查",
-  supplement: "图",
 ) <bike-ppc>
 
 = 鲁棒回归
@@ -213,7 +204,6 @@ with pm.Model() as model_neg:
 #figure(
   image("images/distrs/distr_t.png", width: 45%),
   caption: "t 分布",
-  supplement: "图",
 )
 
 对 Anscombe 四重奏的第三组数据拟合，可以看出，离群点使回归线发生了明显的便宜。
@@ -221,7 +211,6 @@ with pm.Model() as model_neg:
 #figure(
   image("images/bbap/bap-04-ans-linreg.png", width: 50%),
   caption: "Anscombe 第三组",
-  supplement: "图",
 )\
 
 相比之下，t 分布允许我们有一个更鲁棒的估计，因为离群值具有减少$ν$的效应，而非将均值拉向它们，增加标准差。故，均值和标度是通过对大部分数据点的加权来估计的，而非对那些离群值的加权。但标度与数据的分布有关；其值越低，分布越集中。此外，作为经验法则，对于$ν > 2$，标度的值往往非常接近去除离群值后的估计量。
@@ -247,7 +236,7 @@ with pm.Model() as anscombe_t:
 
 #let csv1 = csv("python/bap-02-ans.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "Anscombe III 鲁棒估计",
   supplement: "表",
   kind: table,
@@ -303,7 +292,6 @@ with pm.Model() as model_mlb:
 #figure(
   image("images/bbap/bap-04-multireg-comp.png", width: 40%),
   caption: "简单线性回归 vs. 多元线性回归",
-  supplement: "图",
 )\
 
 可以看到两个模型的温度系数不同。这是因为温度对租赁自行车数量的影响取决于一天中的时间。 更重要的是，$β$系数的值已按其相应自变量的标准差进行缩放，因此我们可以使它们具有可比性。我们可以看到，一旦模型中包含小时数，温度对租赁自行车数量的影响就会变小。这是因为时间的影响已经解释了租赁自行车数量的一些变化，而这些变化之前是通过温度来解释的。在极端情况下，添加一个新变量可以使系数变为0，甚至改变符号。
@@ -318,7 +306,6 @@ with pm.Model() as model_mlb:
 #figure(
   image("images/bbap/bap-04-babies.png", width: 40%),
   caption: "新生儿身长数据集",
-  supplement: "图",
 )\
 
 为了对这些数据进行建模，与之前的模型相比，我们将引入 3 个新的元素：
@@ -366,7 +353,6 @@ axes_v[1].set_ylabel(r"$\bar \sigma$", rotation=0)
 #figure(
   image("images/bbap/bap-04-babies-pred.png", width: 55%),
   caption: "新生儿长度预测",
-  supplement: "图",
 ) <babies-pred>
 
 现在我们已经拟合了模型，我们可能想使用该模型来找出特定女孩的长度与分布的比较情况。回答问题的一种方法是向模型询问 0.5 个月大婴儿的可变长度分布。我们可以通过从长度为 0.5 的后验预测分布中采样来回答这个问题。我们可以通过采样 #raw("pm.sample_posterior_predictive", lang: "python", block: false) 得到答案；唯一的问题是，默认情况下，该函数将返回已观察到的$x$值，即用于拟合模型的值。获得未观察到的值的预测的最简单方法是定义一个`Data`变量（示例中为`x_shared`），然后在对后验预测分布进行采样之前更新该变量的值。
@@ -381,7 +367,6 @@ with model_vv:
 #figure(
   image("images/bbap/bap-04-babies-ppc.png", width: 30%),
   caption: "半个月时的预期长度分布",
-  supplement: "图",
 )
 
 现在我们可以绘制 2 周大女孩的预期长度分布并计算其他数量，例如该长度女孩的百分位数
@@ -434,7 +419,6 @@ for i, g in enumerate(groups):
 #figure(
   image("images/bbap/bap-04-hier-groups.png", width: 60%),
   caption: "合成数据集",
-  supplement: "图",
 )
 
 分层线性模型有两种常见的参数化：中心化和非中心化。 中心化的特点是直接估计各个组的参数；如，明确估计每组的斜率；非中心化估计所有组的共同斜率，然后估计每个组的斜率。值得注意的是，我们仍在对每个组的斜率进行建模，但相对于公共斜率，我们获得的信息是相同的，只是表示方式不同。
@@ -481,5 +465,4 @@ H组的估计仍然是不确定性较高的估计。@hier-comp 显示了八组�
 #figure(
   image("images/bbap/bap-04-hier-fit.png", width: 70%),
   caption: "分层模型拟合",
-  supplement: "图",
 ) <hier-comp>

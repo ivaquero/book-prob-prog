@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "样本诊断",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = 模型
@@ -75,7 +72,7 @@ MCMC 方法在理论上保证了在非常一般的条件和无限数量的样本
 
 #let csv1 = csv("./python/bap-09-hier-summary.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "模型的归纳对比",
   supplement: "表",
   kind: table,
@@ -151,7 +148,6 @@ $ R^2 = frac("Var"(𝔼[hat(y)^s]), "Var"(𝔼[hat(y)^s]) + "Var"(hat(y)^s - y))
 #figure(
   image("images/bbap/bap-10-divergence.png", width: 60%),
   caption: "散度",
-  supplement: "图",
 )
 
 上图中，小的点是常规样本，大的点代表散度。可以看到，中心模型的散度主要集中在漏斗的底端。非中心模型尖端比较尖锐。抽样器通过散度告诉我们，它很难从靠近漏斗尖的区域抽样。

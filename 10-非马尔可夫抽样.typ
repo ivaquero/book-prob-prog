@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "Non-Markov 抽样",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = Bayesian 抽样
@@ -44,7 +41,6 @@ def posterior_grid(grid_points=50, heads=3, tails=10):
 #figure(
   image("images/bbap/bap-10-grid.png", width: 40%),
   caption: "网格计算",
-  supplement: "图",
 )
 
 #tip[

@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "Gaussian 过程",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = 线性模型及其扩展
@@ -61,7 +58,6 @@ ax.legend()
 #figure(
   image("images/bbap/bap-08-gp-func.png", width: 40%),
   caption: "两种生成数据的方法",
-  supplement: "图",
 )
 
 == 多元 Gaussian
@@ -101,7 +97,6 @@ fig.text(-0.03, 0.5, "f(x)", fontsize="medium")
 #figure(
   image("images/bbap/bap-08-gauss-kernal.png", width: 40%),
   caption: "Gaussian 核控制的函数",
-  supplement: "图",
 )
 
 == 正式定义
@@ -186,7 +181,6 @@ ax.set(xlabel="x", ylabel="f(x)")
 #figure(
   image("images/bbap/bap-08-gpreg.png", width: 45%),
   caption: "GP 回归",
-  supplement: "图",
 )
 
 另一种选择是，计算参数空间中给定点的条件分布的均值向量和标准差。这里使用 `gp.predict()` 来计算均值和方差。
@@ -216,7 +210,7 @@ ax.set(xlabel="X")
 
 #let csv1 = csv("data/islands.csv")
 #figure(
-  ktable(csv1.slice(0, 5), 9, inset: 0.31em),
+  tableq(csv1.slice(0, 5), 9, inset: 0.31em),
   caption: none,
   supplement: "表",
   kind: table,
@@ -226,7 +220,7 @@ ax.set(xlabel="X")
 
 #let csv1 = csv("data/islands_dist.csv")
 #figure(
-  ktable(csv1.slice(0, 5), 11, inset: 0.31em),
+  tableq(csv1.slice(0, 5), 11, inset: 0.31em),
   caption: "地理距离",
   supplement: "表",
   kind: table,
@@ -272,14 +266,13 @@ with pm.Model() as model_islands:
 #figure(
   image("images/bbap/bap-08-gpreg-island-post.png", width: 40%),
   caption: "后验样本",
-  supplement: "图",
 )
 
 为了探讨岛屿 - 社会之间的相关性，我们必须将协方差矩阵变成一个相关矩阵。可得到两个观察结果是，Hawaii 是非常孤独的。另外，Malekula（Ml）、Tikopia（Ti）和 Santa Cruz（SC），彼此高度相关。
 
 #let csv1 = csv("./python/bap-08-island-cov.csv")
 #figure(
-  ktable(csv1.slice(0, 5), 11, inset: 0.31em),
+  tableq(csv1.slice(0, 5), 11, inset: 0.31em),
   caption: "距离相关矩阵",
   supplement: "表",
   kind: table,
@@ -290,7 +283,6 @@ with pm.Model() as model_islands:
 #figure(
   image("images/bbap/bap-08-gpreg-island-dist.png", width: 40%),
   caption: "地理-人口-工具数量",
-  supplement: "图",
 )
 
 Malekula、Tikopia 和 Santa Cruz 之间的相关性如何描述了这样一个事实，即他们的 `total-tools` 相当低，接近中位数或低于其人口的预期 `total-tools`。Trobriands 和 Manus 也发生了类似的情况；他们在地理上很接近，但他们的 `total-tools` 比预期的 `logpop` 要少。Tonga 的 `total-tools` 比预期的 `logpop` 要多，而与 Lua Fiji 的相关性相对较高。在某种程度上，该模型告诉我们，Tonga 对 Lua Fiji 有积极影响，增加了 `total-tools`，抵消了它对近邻 Malekula、Tikopia 和 Santa Cruz 的影响。
@@ -335,7 +327,6 @@ def find_midpoint(array1, array2, value):
 #figure(
   image("images/bbap/bap-08-gpcls-iris-hdi.png", width: 45%),
   caption: "无白噪声 HDI",
-  supplement: "图",
 )
 
 由上图，曲线整体拟合的效果还算不错，但尾部在 `x_1` 值较低时向上，而在 `x_1` 值较高时向下。这是在没有数据（或数据很少）时，预测函数向先验值移动的结果。若我们只关注边界判定，这应该不是一个真正的问题，但若我们想根据不同的萼片长度值建立属于 `setosa` 或 `versicolor` 的概率模型，那么我们就应该改进我们的模型，为尾部建立一个更好的模型。实现这一目标的方法之一就是为 GP 添加更多的结构。我们将 `cov` 建模为三个核的组合，通过添加线性核，来解决肥尾问题。
@@ -357,7 +348,6 @@ with pm.Model() as model_iris2:
 #figure(
   image("images/bbap/bap-08-gpcls-iris2-hdi.png", width: 45%),
   caption: "含白噪声 HDI",
-  supplement: "图",
 )
 
 由此不难看出，逻辑回归是 GP 的一个特例，而简单线性回归是 GP 的一个更特别的特例。事实上，很多已知的模型都可看作是 GP 的特例，或至少它们与 GP 有某种联系。
@@ -374,7 +364,7 @@ with pm.Model() as model_iris2:
 
 #let csv1 = csv("data/space_flu.csv")
 #figure(
-  ktable(csv1.slice(0, 6), 2),
+  tableq(csv1.slice(0, 6), 2),
   caption: none,
   supplement: "表",
   kind: table,
@@ -396,7 +386,6 @@ with pm.Model() as model_space_flu:
 #figure(
   image("images/bbap/bap-08-gpcls-flu-hdi.png", width: 40%),
   caption: none,
-  supplement: "图",
 )
 
 显然 GP 能够很好地拟合这个数据集，即使数据要求函数比逻辑函数更复杂。

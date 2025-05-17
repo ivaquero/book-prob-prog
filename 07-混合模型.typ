@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "混合模型",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = 混合模型
@@ -29,7 +26,6 @@ $ p(y|θ) = ∑_(i=1)^k w_i p_i (y|θ_i) $
 #figure(
   image("images/distrs/distr_categ_pmf.png", width: 30%),
   caption: "类别分布",
-  supplement: "图",
 )
 Dirichlet 分布存在于单纯形（simplex）中，满足
 
@@ -49,7 +45,6 @@ Dirichlet 分布就像一个$n$-维的三角形：1-单纯形是一条线，2-�
 #figure(
   image("images/bbap/bap-07-gmm-2.png", width: 40%),
   caption: "有限混合模型",
-  supplement: "图",
 )
 
 上图中的明显无法用单个 Gaussian 分布来正确描述，但也许 3 个或 4 个 Gaussian 分布就可以。实际上，这些数据来自于大约$40$个子总体的混合，只是它们之间有相当大的重叠。根据混合模型的直觉，可将其看作是在 Gaussian 估计模型上的一个$K$面抛硬币模型，而这里的观测变量$y$是以潜变量$z$为条件建立模型的，即$p(y|z, θ)$。可把$z$潜变量看作是一个扰动变量，可对其进行边际化，得到$p(y|θ)$。
@@ -77,12 +72,11 @@ az.plot_trace(idata_mg, ["means", "p"])
 #figure(
   image("images/bbap/bap-07-gmm-2-trace.png", width: 80%),
   caption: "混合模型的轨迹",
-  supplement: "图",
 )
 
 #let csv1 = csv("python/bap-07-gmm-2.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "混合模型的抽样统计",
   supplement: "表",
   kind: table,
@@ -116,7 +110,7 @@ with pm.Model() as model_mgp:
 
 #let csv1 = csv("python/bap-07-gmm-2p.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "混合模型均值排序后的统计",
   supplement: "表",
   kind: table,
@@ -133,7 +127,6 @@ with pm.Model() as model_mgp:
 #figure(
   image("images/bbap/bap-07-gmm-k.png", width: 90%),
   caption: "不同组分数混合模型的 KDE",
-  supplement: "图",
 )
 
 上图展示了总体拟合线（黑实）、平均拟合线（深蓝）、样本线（浅蓝）和平均 Gaussian 分量线（黑虚）。看起来，$K = 3$太低，$K = 4, 5, 6$可能是更好的选择。除了 KDE，还可以使用直方图，也可以计算 PPC 得到$p$值来进行预测。
@@ -141,12 +134,11 @@ with pm.Model() as model_mgp:
 #figure(
   image("images/bbap/bap-07-gmm-k-iqr.png", width: 90%),
   caption: "不同组分数混合模型的 IQR",
-  supplement: "图",
 )
 
 #let csv1 = csv("python/bap-07-gmm-k.csv")
 #figure(
-  ktable(csv1, 10, inset: 0.31em),
+  tableq(csv1, 10, inset: 0.31em),
   caption: "不同组分数混合模型的比较",
   supplement: "表",
   kind: table,
@@ -211,7 +203,6 @@ for α, ax in zip(αs, axes.flatten()):
 #figure(
   image("images/bbap/bap-07-stick-breaking.png", width: 90%),
   caption: none,
-  supplement: "图",
 )
 
 有限混合显示，若在每个数据点上放置一个 Gaussian，然后将所有 Gaussian 相加，就可近似地计算出数据的分布。使用 DP 也可以做类似的事情，但不是在每个数据点上放置一个 Gaussian，而是在 DP 分量分布的每个子棍的位置上放置一个 Gaussian，然后通过该子棍的长度来缩放或加权该 Gaussian。这个过程提供了一个无限 Gaussian 混合模型的一般公式。另外，也可将 Gaussian 替换为任何其他分布，这样就有了一个通用的无限混合模型的公式。下面，使用 Laplace 分布的混合给出一个例子。
@@ -236,7 +227,6 @@ ax.set(yticks=[])
 #figure(
   image("images/bbap/bap-07-stick-laplace.png", width: 40%),
   caption: "Laplace 混合",
-  supplement: "图",
 )
 
 从数学上看，DP 的断棍过程视图可用下面的方式来表示
@@ -279,7 +269,6 @@ with pm.Model() as model_stick:
 #figure(
   image("images/bbap/bap-07-stick-k.png", width: 40%),
   caption: "不同组分数的断棍概率",
-  supplement: "图",
 )
 
 = 连续混合模型

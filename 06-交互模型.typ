@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "交互模型",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = 多项式回归
@@ -41,7 +38,6 @@ with pm.Model() as ans_poly:
 #figure(
   image("images/bbap/bap-04-ans-poly-fit.png", width: 40%),
   caption: "Anscombe 第二组",
-  supplement: "图",
 )
 
 = 交互作用

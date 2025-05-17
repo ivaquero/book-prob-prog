@@ -1,10 +1,7 @@
 #import "lib/lib.typ": *
-#show: qooklet.with(
+#show: chapter-style.with(
   title: "Markov 抽样",
-  author: "Yāng Xīnbīn",
-  footer-cap: "Yāng Xīnbīn",
-  header-cap: "实用概率建模",
-  lang: "zh",
+  info: info,
 )
 
 = Markov 链
@@ -51,7 +48,7 @@ $ q_(i j)^((2)) = ∑_k q_(i k) q_(k j) $
 
 $ q_(i j)^((n)) " is the "(i, j) " entry of " Q^n $
 
-#theorem("Xₙ 的边际分布")[
+#theorem(title: "Xₙ 的边际分布")[
   通过$t_i = P(X_0 = i)$定义$𝒕 = (t_1, t_2, …, t_M)$，并将$𝒕$视为行向量。那么，$X_n$的边际分布由向量$𝒕 Q_n$给出。即$𝒕 Q_n$的第$j$个分量为$P(X_n = j)$。
 ] <margin>
 
@@ -107,7 +104,7 @@ Markov 链可能起初会在瞬时态中度过一段时间，但最终所有时�
 
 若 Markov 链从平稳分布开始，那么所有$X_n$是同分布的，因为它们具有相同的边际分布$𝒔$，但它们不一定是独立的，因为给定$X_(n-1) = i$的$X_n$的条件分布一般与$X_n$的边际分布不同。
 
-#theorem("共鸣魔法")[
+#theorem(title: "共鸣魔法")[
   若 Markov 链从平稳分布开始，则$X_n$的边际分布都是相等的，但这并不等于说$X_n$本身都相等。
 ]
 
@@ -245,7 +242,6 @@ ax.legend()
 #figure(
   image("images/bbap/bap-10-metropolis.png", width: 40%),
   caption: "MH 算法模拟 Beta 分布",
-  supplement: "图",
 )
 
 #theorem[
