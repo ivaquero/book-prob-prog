@@ -1,5 +1,5 @@
 [global]
     title = ""
-    footer-cap = "Yāng Xīnbīn"
-    header-cap = "实用概率编程"
+    footer = "Yāng Xīnbīn"
+    header = "实用概率编程"
     lang = "zh"

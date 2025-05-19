@@ -192,9 +192,9 @@ $ R^2 = frac("Var"(𝔼[hat(y)^s]), "Var"(𝔼[hat(y)^s]) + "Var"(hat(y)^s - y))
 
 $
   hat(θ) = arg max_θ p(x|θ)
-  &= arg max_θ 1 / N ∑_(i=1)^n log p(x_i|θ) \
-  &= arg max_θ ∫p_("data") log p_("model") dd(x)\
-  &= arg max_θ ∫p_("data") log p_("model") / p_("data") dd(x)\
+  &= arg max_θ 1 / N sum_(i=1)^n log p(x_i|θ) \
+  &= arg max_θ ∫ p_("data") log p_("model") dd(x)\
+  &= arg max_θ ∫ p_("data") log p_("model") / p_("data") dd(x)\
   &= arg min_θ "KL"(p_("data") || p_("model"))
 $
 

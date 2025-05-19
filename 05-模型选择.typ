@@ -87,11 +87,11 @@ $ "p-value" ≜ p(T_("sim") > T_("obs")|y) $
 
 度量一个模型与数据拟合程度的通用的测量方法是计算对数似然。
 
-$ ∑ log p(y_i|θ) $
+$ sum log p(y_i|θ) $
 
 当似然是正态的时候，这与二次平均误差成正比。在实际工作中，由于历史原因，人们通常使用离差（deviance）
 
-$ - 2 ∑ log p(y_i|θ) $
+$ - 2 sum log p(y_i|θ) $
 
 离差对于 Bayesian 和 Non-Bayesian 均是一样的；不同的是，在 Bayesian 框架下，$θ$是从后验中估计出来的，且，像任何从后验中得出的数量一样，它有一个分布。相反，在 Non-Bayesian 环境下，$θ$是一个点估计。
 
@@ -99,7 +99,7 @@ $ - 2 ∑ log p(y_i|θ) $
 
 AIC（Akaike information criterion）是一个非常著名的、被广泛使用的信息标准
 
-$ "AIC" = -2 ∑ log p(y_i|hat(θ)_("MLE")) + 2k $
+$ "AIC" = -2 sum log p(y_i|hat(θ)_("MLE")) + 2k $
 
 其中，$k$是参数的数量。对于 Non-Bayesian 来说，MLE 是一种常见的做法，当使用扁平先验时，相当于 MAP 估计。$-2$的存在是历史原因。
 
@@ -107,7 +107,7 @@ $ "AIC" = -2 ∑ log p(y_i|hat(θ)_("MLE")) + 2k $
 
 另一种信息标准是 BIC（Bayesian information criterion），它类似于逻辑回归，其定义为
 
-$ "BIC" = -2 ∑ log p(y_i|hat(θ)_("MLE")) + k ln(N) $
+$ "BIC" = -2 sum log p(y_i|hat(θ)_("MLE")) + k ln(N) $
 
 其中，$N$为数据量。BIC 的名字可能会让人误解，其提出是为了纠正 AIC 的一些问题。BIC 并非真正的 Bayesian，事实上和 AIC 很相似。它亦假设扁平先验，并使用 MLE。
 
@@ -120,7 +120,7 @@ $ "WAIC" = -2 * "LPPD" + 2 * p_("WAIC") $
 展开得
 
 $
-  "WAIC" = - 2 ∑_i^n log (1 / S ∑_(s=1)^S p(y_i|θ^s)) + 2 ∑_i^n limits(V)_(s=1)^S log p(y_i|θ^s)
+  "WAIC" = - 2 sum_i^n log (1 / S sum_(s=1)^S p(y_i|θ^s)) + 2 sum_i^n limits(V)_(s=1)^S log p(y_i|θ^s)
 $
 
 第一项，LPPD（log point-wise predictive density），是计算$S$后验样本上的平均似然。我们对每个数据点进行计算，然后取对数，在所有数据点上求和。对比离差，其计算考虑到了后验。
@@ -170,9 +170,9 @@ $ w_i = frac(e^(1 / 2 Δ E_i), sum^M e^(-1 / 2 Δ E_j)) $
 
 计算每个模型权重的另一种方法是预测分布的堆叠（stacking），其基本思想是通过最小化元模型和真实生成模型之间的 KL 散度（将在非马尔可夫抽样中详述）来组合元模型中的几个模型。当使用对数计分规则时，这相当于计算下式
 
-$ max_n 1 / n ∑ log ∑_(k=1)^k w_k p(y_i|y_(-i), M_k) $
+$ max_n 1 / n sum log sum_(k=1)^k w_k p(y_i|y_(-i), M_k) $
 
-其中，$n$是数据点的数量，$K$是模型的数量。为了强制求解，将$w$约束为$w_k ≥ 0$且$∑ w_k = 1$。$p(y_i|y_(-i), M k)$是$M_k$模型的留一预测分布。幸运的是，我们可使用 WAIC 或 LOO 来逼近精确的留一预测分布。
+其中，$n$是数据点的数量，$K$是模型的数量。为了强制求解，将$w$约束为$w_k ≥ 0$且$sum w_k = 1$。$p(y_i|y_(-i), M k)$是$M_k$模型的留一预测分布。幸运的是，我们可使用 WAIC 或 LOO 来逼近精确的留一预测分布。
 
 #figure(
   image("images/bbap/bap-05-model-avg.png", width: 40%),

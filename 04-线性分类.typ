@@ -313,7 +313,7 @@ with pm.Model() as multireg_pearson:
 
 将逻辑回归泛化到两类以上的一种方法是用 softmax 回归，这里需要对逻辑回归进行 2 个改变，首先，用 softmax 函数代替逻辑函数
 
-$ "softmax"_i (μ = frac(exp(μ_i), ∑ exp(μ_k))) $
+$ "softmax"_i (μ = frac(exp(μ_i), sum exp(μ_k))) $
 
 softmax 保证得到加起来为$1$的正值，当$κ = 2$时，softmax 函数为 sigmoid 函数。实际上，softmax 函数与统计力学中的 Boltzmann 分布具有相同的形式，后者有一个称为温度的参数$T$，用于切分$μ$：
 

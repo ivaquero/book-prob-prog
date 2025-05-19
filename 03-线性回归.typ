@@ -263,7 +263,7 @@ with pm.Model() as anscombe_t:
 
 多元线性回归（multiple linear regression）允许我们同时考虑多个因素的影响，其表示如下
 
-$ μ = α + ∑_(i=1)^m β_i x_i $
+$ μ = α + sum_(i=1)^m β_i x_i $
 线性代数形式为
 
 $ μ = α + 𝑿 β $

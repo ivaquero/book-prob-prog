@@ -91,7 +91,7 @@ $ p(hat(x)|X) = ∫_θ p(hat(x), θ|X) dd(θ) = ∫_θ p(θ|X) p(hat(x)|θ, X) d
 
 我们可使用 KL 散度来比较模型，这将给出哪个模型更接近真实分布的后验。由于不知道真实的分布，故 KL 散度不能直接应用。于是，我们使用 KL 散度的概率形式
 
-$ D_("KL")(q(θ) ∥ p(θ|y)) = ∫q(θ) log frac(q(θ), p(θ|y)) d(θ) $
+$ D_("KL")(q(θ) ∥ p(θ|y)) = ∫ q(θ) log frac(q(θ), p(θ|y)) d(θ) $
 
 这里，$q$是较简单的分布，我们用它来逼近后验$p(θ|y)$，$q$通常被称为变分分布（variational distribution）。通过使用优化方法，我们试图找出$q$的参数（variational parameters），使$q$在 KL 散度方面尽可能地接近后验分布。
 
@@ -99,16 +99,16 @@ $ D_("KL")(q(θ) ∥ p(θ|y)) = ∫q(θ) log frac(q(θ), p(θ|y)) d(θ) $
 
 $
   D_("KL")(q(θ) ∥ p(θ|y))
-  &= ∫q(θ) log (frac(q(θ), frac(p(θ, y), p(y)))) d(θ)\
-  &= ∫q(θ) log (frac(q(θ), p(θ, y)) p(y)) d(θ) \
-  &= ∫q(θ) log frac(q(θ), p(θ, y)) d(θ) + ∫q(θ) log p(y) d(θ)
+  &= ∫ q(θ) log (frac(q(θ), frac(p(θ, y), p(y)))) d(θ)\
+  &= ∫ q(θ) log (frac(q(θ), p(θ, y)) p(y)) d(θ) \
+  &= ∫ q(θ) log frac(q(θ), p(θ, y)) d(θ) + ∫ q(θ) log p(y) d(θ)
 $
 
 其中，$q(θ)$的积分为 1，可将$log p(y)$从积分中移出，得
 
 $
-  D_("KL")(q(θ) ∥ p(θ|y)) &= ∫q(θ) log frac(q(θ), p(θ, y)) d(θ) + log p(y) \
-  &= underbrace(-∫q(θ) log frac(p(θ, y), q(θ)) d(θ), "evidence lower bound (ELBO)") + log p(y)
+  D_("KL")(q(θ) ∥ p(θ|y)) &= ∫ q(θ) log frac(q(θ), p(θ, y)) d(θ) + log p(y) \
+  &= underbrace(-∫ q(θ) log frac(p(θ, y), q(θ)) d(θ), "evidence lower bound (ELBO)") + log p(y)
 $
 
 由于$D_("KL") ≥ 0$，则$log p(y) ≥ "ELBO"$，换句话说，证据（边际似然）总是 ≥ ELBO，这就是它名字的由来。又因为$log p(y)$是一个常数，我们只关注 ELBO。最大化 ELBO 相当于最小化 KL 散度。故，最大化 ELBO 是使$q(θ)$尽可能地接近后验$p(θ|y)$的方法。
