@@ -1,5 +1,6 @@
 [global]
-    title = ""
+    title = "实用概率编程"
+    author = "Yāng Xīnbīn"
     footer = "Yāng Xīnbīn"
     header = "实用概率编程"
     lang = "zh"
