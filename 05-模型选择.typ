@@ -198,7 +198,6 @@ $ "BF" = frac(p(y|M_0), p(y|M_1)) $
 #figure(
   tableq(data, 2),
   caption: "BF vs. 证据的强度",
-  supplement: "表",
   kind: table,
 )
 

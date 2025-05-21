@@ -78,7 +78,6 @@ az.plot_trace(idata_mg, ["means", "p"])
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "混合模型的抽样统计",
-  supplement: "表",
   kind: table,
 )
 
@@ -112,7 +111,6 @@ with pm.Model() as model_mgp:
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "混合模型均值排序后的统计",
-  supplement: "表",
   kind: table,
 )
 
@@ -140,7 +138,6 @@ with pm.Model() as model_mgp:
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "不同组分数混合模型的比较",
-  supplement: "表",
   kind: table,
 )
 

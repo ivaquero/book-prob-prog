@@ -238,7 +238,6 @@ with pm.Model() as anscombe_t:
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "Anscombe III 鲁棒估计",
-  supplement: "表",
   kind: table,
 ) <ans>
 

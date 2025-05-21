@@ -212,7 +212,6 @@ ax.set(xlabel="X")
 #figure(
   tableq(csv1.slice(0, 5), 9, inset: 0.31em),
   caption: none,
-  supplement: "表",
   kind: table,
 )
 
@@ -222,7 +221,6 @@ ax.set(xlabel="X")
 #figure(
   tableq(csv1.slice(0, 5), 11, inset: 0.31em),
   caption: "地理距离",
-  supplement: "表",
   kind: table,
 )
 
@@ -274,7 +272,6 @@ with pm.Model() as model_islands:
 #figure(
   tableq(csv1.slice(0, 5), 11, inset: 0.31em),
   caption: "距离相关矩阵",
-  supplement: "表",
   kind: table,
 )
 
@@ -366,7 +363,6 @@ with pm.Model() as model_iris2:
 #figure(
   tableq(csv1.slice(0, 6), 2),
   caption: none,
-  supplement: "表",
   kind: table,
 )
 

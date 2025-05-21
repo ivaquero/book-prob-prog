@@ -173,7 +173,6 @@ with pm.Model() as coin_flip:
 #figure(
   tableq(csv1, 5, inset: 0.31em),
   caption: "后验描述",
-  supplement: "表",
   kind: table,
 )
 

@@ -25,7 +25,6 @@ Poisson 过程（PP）是在时间轴上的不同点发生的到达序列，因�
     [例子], [医院平均每小时出生的婴儿], [医院婴儿出生的时间间隔],
   ),
   caption: "Poisson 分布和指数分布",
-  supplement: "表",
   kind: table,
 )
 
@@ -191,7 +190,6 @@ PP 有许多扩展。我们可以允许$λ$作为时间或空间的函数而变�
 #figure(
   tableq(csv1.slice(0, 4), 1),
   caption: "矿难",
-  supplement: "表",
   kind: table,
 )
 
@@ -241,7 +239,6 @@ with pm.Model() as model_coal:
 #figure(
   tableq(csv1.slice(0, 4), 2),
   caption: "红木",
-  supplement: "表",
   kind: table,
 )
 

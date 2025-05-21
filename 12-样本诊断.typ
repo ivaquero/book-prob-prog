@@ -74,7 +74,6 @@ MCMC 方法在理论上保证了在非常一般的条件和无限数量的样本
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "模型的归纳对比",
-  supplement: "表",
   kind: table,
 )
 
