@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "分层模型",
-  info: info,
-)
+#show: chapter-style.with(title: "分层模型", info: info)
 
 = 组间比较
 <组间比较>
@@ -261,22 +258,19 @@ with pm.Model(coords=coords_ball) as model_football:
 
 有向无环图（directed acyclic graph，DAG），是一个没有有向循环的、有限的有向图。它可以帮助明晰问题，"在没有额外假设的情况下，我们能做出什么决定？"。
 
-#figure(
-  image("models/srt-ch01-dag.png", width: 30%),
-  caption: "DAG",
-)
+#figure(image("models/srt-ch01-dag.png", width: 30%), caption: "DAG")
 
 在一个因果模型中，加入所有元素往往是不明智的。通过 DAG 递进查询（query），可以逼近真相。
 
 由上图，可以写出如下关系
 
 $
-  Y &∼ X \
-  Y &∼ X + A \
-  Y &∼ X + A + B \
-  Y &∼ X + C \
-  Y &∼ X + A + C \
-  Y &∼ X + B + C
+  Y & ∼ X         \
+  Y & ∼ X + A     \
+  Y & ∼ X + A + B \
+  Y & ∼ X + C     \
+  Y & ∼ X + A + C \
+  Y & ∼ X + B + C
 $
 
 但，实际上的模型只需要最后一个关系式，即

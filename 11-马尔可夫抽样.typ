@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "Markov 抽样",
-  info: info,
-)
+#show: chapter-style.with(title: "Markov 抽样", info: info)
 
 = Markov 链
 <Markov-链>
@@ -155,8 +152,8 @@ Markov 链可能起初会在瞬时态中度过一段时间，但最终所有时�
 Monte Carlo 方法是一个非常广泛的算法家族，它使用随机抽样来计算或模拟一个给定的过程。当我们不确定如何计算$X$分布的均值和方差，但知道如何从该分布生成独立同分布样本$X_1, …, X_n$时，可以使用模拟抽样的样本均值和样本方差来近似计算真实均值和真实方差：
 
 $
-  𝔼[X] &≈ 1 / n (X_1 + … + X_n) = macron(X)_n\
-  "Var"(X) &≈ frac(1, n - 1) sum_(j=1)^n (X_j - macron(X)_n)^2
+      𝔼[X] & ≈ 1 / n (X_1 + … + X_n) = macron(X)_n              \
+  "Var"(X) & ≈ frac(1, n - 1) sum_(j=1)^n (X_j - macron(X)_n)^2
 $
 
 由大数定律，我们可以通过增加$n$来获得越来越好的近似值，只需在计算机上运行更长的时间，而非费力地处理可能难以处理的和或积分。这种产生随机值来逼近某个量的模拟方法就是 Monte Carlo 方法。

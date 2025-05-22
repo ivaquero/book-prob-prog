@@ -1,24 +1,18 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "概率编程简介",
-  info: info,
-)
+#show: chapter-style.with(title: "概率编程简介", info: info)
 
 = 概率编程
 <概率编程>
 
 通常，概率编程指 Bayesian 推断，其思想是对不断模型提出合理的质疑，在最小化质疑过程中，得到最优模型，其遵循以下流程
 
-#block(
-  height: 3em,
-  columns(3)[
-    + 定义样本的生成模型
-    + 定义具体的估计量
-    + 设计统计方法来产生估计量
-    + 对步骤 3. 进行测试
-    + 分析样本，并总结
-  ],
-)
+#block(height: 3em, columns(3)[
+  + 定义样本的生成模型
+  + 定义具体的估计量
+  + 设计统计方法来产生估计量
+  + 对步骤 3. 进行测试
+  + 分析样本，并总结
+])
 
 由 Bayes' 法则
 
@@ -86,10 +80,7 @@ $ p(θ|y) ∼ "Beta"(α_"prior" + y, β_"prior" + N - y) $
 == 获取后验
 
 #figure(
-  image(
-    "images/bbap/bap-01-coin-post.png",
-    width: 60%,
-  ),
+  image("images/bbap/bap-01-coin-post.png", width: 60%),
   caption: "Beta 分布后验",
 )
 
@@ -108,10 +99,7 @@ $ p(θ|y) ∼ "Beta"(α_"prior" + y, β_"prior" + N - y) $
 
 一个常用的总结后验分布的方法是使用最高后验密度（highest posterior density，HPD），其对应的区间称最高密度区间（highest density interval，HDI），是包含给定部分概率密度的最短区间。其中最常用的是 95% 的 HDI。若我们说某项分析的 95% HDI 是$[2, 5]$，意味着根据我们的数据和模型，我们认为有关参数在$[2, 5]$之间的概率为 95% 。
 
-#figure(
-  image("images/bbap/bap-01-coin-hdi.png", width: 40%),
-  caption: "HPD",
-)
+#figure(image("images/bbap/bap-01-coin-hdi.png", width: 40%), caption: "HPD")
 
 #warning[
   请注意，HDI 区间不等于置信区间。
@@ -170,11 +158,7 @@ with pm.Model() as coin_flip:
 通过 #raw("az.summary(idata, kind=\"stats\").round(2)", lang: "python", block: false) 可以得到得到均值、标准差和 94% 的 HDI，这里使用 94% 是因为这是对 95% 值的任意性友好剩余。可通过向参数 `hdi_prob` 传递一个不同的值来改变这个值。
 
 #let csv1 = csv("python/bap-02-coin.csv")
-#figure(
-  tableq(csv1, 5, inset: 0.31em),
-  caption: "后验描述",
-  kind: table,
-)
+#figure(tableq(csv1, 5, inset: 0.31em), caption: "后验描述", kind: table)
 
 我们可以使用标准差报告类似的摘要。标准差相对于 HDI 的优势在于它是一种更受欢迎的统计数据。缺点是，我们必须更加谨慎地解释它；否则，它会导致毫无意义的结果。例如，若我们计算均值$±2$个标准差，我们将得到区间$(-0.02, 0.7)$；上限与我们从 HDI 获得的$0.65$相差不大，但下限实际上超出了$θ$的可能值。
 
@@ -201,10 +185,7 @@ az.plot_posterior(idata_coin, ref_val=0.5, ax=axes[2])
 ROPE 的定义是取决于上下文的，决定向来是主观的，我们的任务是根据我们的目标，做出最明智的决定。下图中，ROPE 显示为一条半透明的粗线。`plot_posterior()` 默认显示离散变量的直方图和连续变量的 KDE，还可得到分布的均值（使用 `point_estimate` 参数求取中数或众数）和`94%` 的 HDI，在图底用黑线表示。除此之外，也可选择将后验与参考值进行比较。
 
 #figure(
-  image(
-    "images/bbap/bap-02-coin-posterior.png",
-    width: 80%,
-  ),
+  image("images/bbap/bap-02-coin-posterior.png", width: 80%),
   caption: "评估后验",
 ) <coin-post>
 
@@ -280,9 +261,9 @@ for i in grid:
 由于不知道均值或标准差，我们必须为它们设定先验。因此，一个合理的模型可能是：
 
 $
-  mu &~ 𝒱(l, h) \
-  sigma &~ ℋ 𝒩(sigma_sigma) \
-  Y &~ 𝒩(mu, sigma)
+     mu & ~ 𝒱(l, h)          \
+  sigma & ~ ℋ 𝒩(sigma_sigma) \
+      Y & ~ 𝒩(mu, sigma)
 $
 
 对应的代码为
@@ -297,10 +278,7 @@ with pm.Model() as model_g:
 
 我们可以使用#raw("az.plot_pair()", lang: "python", block: false)来查看二维后验分布以及$μ$和$σ$的边际分布。
 
-#figure(
-  image("images/bbap/bap-02-chem-pair.png", width: 40%),
-  caption: none,
-)
+#figure(image("images/bbap/bap-02-chem-pair.png", width: 40%), caption: none)
 
 == 后验概率检查
 

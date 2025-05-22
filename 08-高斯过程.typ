@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "Gaussian 过程",
-  info: info,
-)
+#show: chapter-style.with(title: "Gaussian 过程", info: info)
 
 = 线性模型及其扩展
 <线性模型及其扩展>
@@ -178,10 +175,7 @@ ax.plot(X, y, "ko")
 ax.set(xlabel="x", ylabel="f(x)")
 ```
 
-#figure(
-  image("images/bbap/bap-08-gpreg.png", width: 45%),
-  caption: "GP 回归",
-)
+#figure(image("images/bbap/bap-08-gpreg.png", width: 45%), caption: "GP 回归")
 
 另一种选择是，计算参数空间中给定点的条件分布的均值向量和标准差。这里使用 `gp.predict()` 来计算均值和方差。
 
@@ -209,11 +203,7 @@ ax.set(xlabel="X")
 下面的数据中有 10 个不同的岛屿社会；对于每个岛屿社会，有他们使用的 `total-tools` 。一些理论预测，较大的人口比较小的人口更易开发和维护工具。另一个重要的因素是人口之间的接触率。由于 `total-tools` 作为因变量，可用人口作为自变量进行 Poisson 回归。这里使用人口的对数，因为人口的数量级更重要。
 
 #let csv1 = csv("data/islands.csv")
-#figure(
-  tableq(csv1.slice(0, 5), 9, inset: 0.31em),
-  caption: none,
-  kind: table,
-)
+#figure(tableq(csv1.slice(0, 5), 9, inset: 0.31em), caption: none, kind: table)
 
 将接触率纳入模型的一种方法是收集这些社会在历史上的接触频率信息，并创建一个分类变量，如低/高接触率。另一种方法是使用社会之间的距离作为接触率的代用词，因为我们可合理地假设，较近社会比远处的社会接触得更频繁。
 
@@ -360,11 +350,7 @@ with pm.Model() as model_iris2:
 假设将患某种疾病的概率作为年龄的函数来建模。结果发现，非常年轻和非常年长的人比中年人的风险更高。数据集 `space_flu` 是基于此想法伪造的数据集。
 
 #let csv1 = csv("data/space_flu.csv")
-#figure(
-  tableq(csv1.slice(0, 6), 2),
-  caption: none,
-  kind: table,
-)
+#figure(tableq(csv1.slice(0, 6), 2), caption: none, kind: table)
 
 ```python
 with pm.Model() as model_space_flu:

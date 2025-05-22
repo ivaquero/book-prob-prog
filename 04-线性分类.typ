@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "线性分类",
-  info: info,
-)
+#show: chapter-style.with(title: "线性分类", info: info)
 
 = 分类任务
 
@@ -11,7 +8,7 @@
 分类是关于给定一些输入变量，给一个输出变量分配一个离散值（代表一个离散类）。对于分类任务，需要一种能输出$[0, 1]$区间的值的函数。为实现这种泛化，我们可以在线性回归方程后加入一层激活函数（activation function），也称逆链接函数（inverse link function）。
 
 $
-  f & : w^⊤ x → {0, 1}\
+       f & : w^⊤ x → {0, 1} \
   f^(-1) & : {0, 1} → w^⊤ x
 $
 
@@ -47,8 +44,8 @@ $ "logistic" = frac(1, 1 + e^(-z)) $
 这个函数的结果总是在$[0, 1]$区间内，可把从线性模型中计算出来的值压缩成可输入进 Bernoulli 分布的值。首先，对这些类别进行编码，令$y ∈ {0, 1}$。这里的$θ$将由一个线性模型定义，并以 sigmoid 函数作为激活函数。省略先验，得
 
 $
-  θ &~ "logistic"(α + x β)\
-  y &~ "Bern"(θ)
+  θ & ~ "logistic"(α + x β) \
+  y & ~ "Bern"(θ)
 $
 
 鸢尾数据集的每个物种有 50 个样本。对于每个样本，数据集包含 4 个变量，假设其均为独立变量（也称特征）：花瓣长度、花瓣宽度、萼片长度和萼片宽度。一种检查数据的方法是散点矩阵。矩阵是对称的，上下两个三角形显示相同的信息。主对角线上是每个特征的 KDE。在每个子图中，我们用不同的颜色表示 3 个物种。
@@ -78,11 +75,7 @@ with pm.Model() as model_lg:
 ```
 
 #let csv1 = csv("python/bap-04-iris-logreg.csv")
-#figure(
-  tableq(csv1, 10, inset: 0.31em),
-  caption: "逻辑回归的系数",
-  kind: table,
-)
+#figure(tableq(csv1, 10, inset: 0.31em), caption: "逻辑回归的系数", kind: table)
 
 下图显示了萼片长度与鸢尾种类的关系（`setosa = 0`，`versicolor = 1`）。为了避免重叠，这里二进制响应变量是抖动的。S 形线是$θ$的均值。这条线可被解释为知道萼片长度的值时，花是 `versicolor`（x = 1）的概率。决策边界被表示为一条垂直线，左边对应于$0$（`setosa`），右边的值对应于 $1$ （`versicolor`）。。半透明带为各曲线的 94％ HPD。
 
@@ -373,8 +366,8 @@ Poisson 分布假设事件的发生是相互独立的，且是在一个固定的
 这被称为零膨胀 Poisson（zero-inflated Poisson，ZIP）模型。基本上，ZIP 分布是
 
 $
-  p(y_j = 0) &= 1 - ψ + (ψ) e^(-mu)\
-  p(y_j = k_i) &= ψ frac(μ_i^x e^(-mu), x_i!)
+    p(y_j = 0) & = 1 - ψ + (ψ) e^(-mu)         \
+  p(y_j = k_i) & = ψ frac(μ_i^x e^(-mu), x_i!)
 $
 
 即，零生成过程和 Poisson 分布的混合。其中，速率$μ$是一个随机变量的 Gamma 分布。当数据过于分散时，即数据的方差大于其均值时，负二项分布是 Poisson 分布的一个有用的替代方法。
@@ -437,8 +430,4 @@ with pm.Model() as ZIP_reg:
 - 乘坐露营车会增加约$0.81$的预期捕鱼数量
 
 #let csv1 = csv("python/bap-04-fish-zipreg.csv")
-#figure(
-  tableq(csv1, 10, inset: 0.31em),
-  caption: "ZIP 回归系数",
-  kind: table,
-)
+#figure(tableq(csv1, 10, inset: 0.31em), caption: "ZIP 回归系数", kind: table)

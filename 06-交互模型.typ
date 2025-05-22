@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "交互模型",
-  info: info,
-)
+#show: chapter-style.with(title: "交互模型", info: info)
 
 = 多项式回归
 <多项式回归>
@@ -49,8 +46,8 @@ $ μ = α + β_1 x_1 + β_2 x_2 + β_3 x_1 x_2 $
 重写可得
 
 $
-  μ &= α + underbrace((β_1 + β_3 x_2), "slope of" med x_1) x_1 + β_2 x_2\
-  μ &= α + β_1 x_1 + underbrace((β_2 + β_3 x_1), "slope of" med x_2)
+  μ & = α + underbrace((β_1 + β_3 x_2), "slope of" med x_1) x_1 + β_2 x_2 \
+  μ & = α + β_1 x_1 + underbrace((β_2 + β_3 x_1), "slope of" med x_2)
 $
 
 这向我们展示了以下视角

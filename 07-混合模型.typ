@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "混合模型",
-  info: info,
-)
+#show: chapter-style.with(title: "混合模型", info: info)
 
 = 混合模型
 

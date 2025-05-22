@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "模型选择",
-  info: info,
-)
+#show: chapter-style.with(title: "模型选择", info: info)
 
 = 后验预测检查
 
@@ -23,10 +20,7 @@ $ "p-value" ≜ p(T_("sim") > T_("obs")|y) $
 
 若数据和模拟结果一致，我们应该期待一个$0.5$左右的 p 值，否则我们就存在一个有偏差的后验预测分布。
 
-#figure(
-  image("images/bbap/bap-05-mean-iqr.png", width: 60%),
-  caption: "p 值",
-)
+#figure(image("images/bbap/bap-05-mean-iqr.png", width: 60%), caption: "p 值")
 
 实际上，Bayes 的 p 值基本上和频率主义一样，但只是得到一个度量后验预测拟合度的数字的方法。即，得到的模拟统计量$T_("sim")$的概率等于或比数据中的统计量$T_("obs")$更极端。
 
@@ -195,11 +189,7 @@ $ "BF" = frac(p(y|M_0), p(y|M_1)) $
 当$"BF" > 1$时，模型 0 比模型 1 更能解释数据。一些学者提出了带有范围的表格，以分散和方便解释。例如，下面的项目表显示了证据的强度，赞成模型 0，反对模型 1。
 
 #let data = csv("data/msr-bf.csv")
-#figure(
-  tableq(data, 2),
-  caption: "BF vs. 证据的强度",
-  kind: table,
-)
+#figure(tableq(data, 2), caption: "BF vs. 证据的强度", kind: table)
 
 若模型都具有相同的先验概率，则使用$p(y|M_k)$来比较模型。否则，必须计算后验概率。
 

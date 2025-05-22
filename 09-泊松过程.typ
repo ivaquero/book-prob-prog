@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "Poisson 过程",
-  info: info,
-)
+#show: chapter-style.with(title: "Poisson 过程", info: info)
 
 = Poisson 过程
 <Poisson-过程>
@@ -187,17 +184,13 @@ PP 有许多扩展。我们可以允许$λ$作为时间或空间的函数而变�
 矿难包括 1851 年至 1962 年英国的矿难记录。灾难的数量被认为是受这一时期安全法规变化的影响。我们希望将灾难发生率作为时间的函数进行建模。
 
 #let csv1 = csv("data/coal.csv")
-#figure(
-  tableq(csv1.slice(0, 4), 1),
-  caption: "矿难",
-  kind: table,
-)
+#figure(tableq(csv1.slice(0, 4), 1), caption: "矿难", kind: table)
 
 我们的拟合模型是
 
 $
-  f(x) & ∼ cal("GP")(μ_x, K(x, x^′))\
-  y & ∼ "Poi"(f(x))
+  f(x) & ∼ cal("GP")(μ_x, K(x, x^′)) \
+     y & ∼ "Poi"(f(x))
 $
 
 这是一个 Poisson 回归问题。但当只有灾害日期一列，则需要对数据进行离散化处理，就像建立直方图一样。我们使用 `bin` 的中心作为变量$x$，而每个 `bin` 的计数作为变量$y$。
@@ -236,11 +229,7 @@ with pm.Model() as model_coal:
 现在将刚才的同类型模型应用到二维空间问题上，使用红木数据。数据集由给定区域内红木的位置组成，目标是确定树木的速率在此区域是如何分布的。
 
 #let csv1 = csv("data/redwood.csv")
-#figure(
-  tableq(csv1.slice(0, 4), 2),
-  caption: "红木",
-  kind: table,
-)
+#figure(tableq(csv1.slice(0, 4), 2), caption: "红木", kind: table)
 
 和流感模型一样，先对数据离散化。这里，我们没有做筛网（mesh grid），而是将 $x_1$ 和$x_2$数据分开处理，从而为每个坐标建立一个协方差矩阵，有效地减少了计算 GP 所需矩阵的大小。我们只需要在使用 `LatentKron()` 来定义 GP。需要注意的是，这不是一个数值技巧，而是这类矩阵结构的数学属性，故我们并没有在模型中引入任何近似或误差，我们只是用一种可以加快计算速度的方式来表达。
 

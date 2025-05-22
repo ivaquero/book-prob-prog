@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "线性回归",
-  info: info,
-)
+#show: chapter-style.with(title: "线性回归", info: info)
 
 = 简单线性回归
 <简单线性回归>
@@ -153,11 +150,11 @@ ax.set(xlabel="temperature", ylabel="rented bikes")
 广义线性模型（generalized linear model，GLM）是线性模型的推广，它允许我们使用不同的似然分布。在较高层次上，我们可以编写一个 Bayesian GLM，如下所示：
 
 $
-  α &∼ "a prior" \
-  β &∼ "another prior" \
-  θ &∼ "some prior" \
-  μ &= α + β X \
-  Y &∼ φ(f(μ), θ)
+  α & ∼ "a prior"       \
+  β & ∼ "another prior" \
+  θ & ∼ "some prior"    \
+  μ & = α + β X         \
+  Y & ∼ φ(f(μ), θ)
 $
 
 $φ$是任意分布；一些常见的情况是正态、Student’s t、Gamma 和 NegativeBinomial。$θ$表示分布可能具有的任何辅助参数，例如正态分布的$σ$。我们还有$f$，通常称为逆链接函数（inverse link function）。
@@ -201,10 +198,7 @@ with pm.Model() as model_neg:
 
 在处理离群值和 Gaussian 分布时，一个非常有用的选择是用 t 似然代替正态似然。该分布有 3 个参数：均值、标度和自由度。自由度通常使用字母$ν$，可在$[0, ∞]$的内变化，也称为正态性参数（normality parameter）。t 分布的一个的特征是，该分布的方差只对$ν > 2$进行定义。要注意 t 分布的标度与标准差不一样，当接近无穷大时，标度近似于标准差。
 
-#figure(
-  image("images/distrs/distr_t.png", width: 45%),
-  caption: "t 分布",
-)
+#figure(image("images/distrs/distr_t.png", width: 45%), caption: "t 分布")
 
 对 Anscombe 四重奏的第三组数据拟合，可以看出，离群点使回归线发生了明显的便宜。
 

@@ -1,8 +1,5 @@
 #import "lib/lib.typ": *
-#show: chapter-style.with(
-  title: "Non-Markov 抽样",
-  info: info,
-)
+#show: chapter-style.with(title: "Non-Markov 抽样", info: info)
 
 = Bayesian 抽样
 
@@ -38,10 +35,7 @@ def posterior_grid(grid_points=50, heads=3, tails=10):
 
 很容易注意到，更多的点可得到更好的近似。网格方法最大的问题是，这种方法随着参数数量（维度）的增加而缩放性很差。随着维度增加，除了点的数量增加之外，参数空间中大部分后验集中的区域相比抽样量越来越小。这是统计学和机器学习中普遍存在的现象，通常被称为维度诅咒（curse of dimensionality），数学家更喜欢称之为度量集中（concentration of measure）。
 
-#figure(
-  image("images/bbap/bap-10-grid.png", width: 40%),
-  caption: "网格计算",
-)
+#figure(image("images/bbap/bap-10-grid.png", width: 40%), caption: "网格计算")
 
 #tip[
   维度诅咒被用于谈论各种只存在于高维空间中的现象。如
