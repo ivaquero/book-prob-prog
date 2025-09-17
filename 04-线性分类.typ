@@ -366,7 +366,7 @@ Poisson 分布假设事件的发生是相互独立的，且是在一个固定的
 这被称为零膨胀 Poisson（zero-inflated Poisson，ZIP）模型。基本上，ZIP 分布是
 
 $
-    p(y_j = 0) & = 1 - ψ + (ψ) e^(-mu)         \
+    p(y_j = 0) & = 1 - ψ + (ψ) e^(-mu) \
   p(y_j = k_i) & = ψ frac(μ_i^x e^(-mu), x_i!)
 $
 
