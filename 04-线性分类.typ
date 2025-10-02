@@ -198,14 +198,7 @@ $ log frac(p(y=1), 1 - p(y=1)) = α + X β $
 
 其中，$frac(p(y=1), 1 - p(y=1))$就是之前介绍过的几率（odds），而逻辑回归中的系数$β$就代表随$x$增加而增加的对数几率。
 
-概率到几率的变换是单调递增变换，概率被限制在$[0, 1]$区间，而几率则在$[0, ∞)$。对数是另一种单调变换，对数几率在$(-∞, ∞)$区间内。
-
-#figure(
-  image("images/funcs/logit-odds.png", width: 40%),
-  caption: "几率-对数几率",
-)
-
-故，总结提供的系数均是以对数几率为标准的。
+概率到几率的变换是单调递增变换，概率被限制在$[0, 1]$区间，而几率则在$[0, ∞)$。对数是另一种单调变换，对数几率在$(-∞, ∞)$区间内。故，总结提供的系数均是以对数几率为标准的。
 
 #let csv1 = csv("python/bap-04-iris-logreg-multi.csv")
 #figure(
@@ -430,4 +423,8 @@ with pm.Model() as ZIP_reg:
 - 乘坐露营车会增加约$0.81$的预期捕鱼数量
 
 #let csv1 = csv("python/bap-04-fish-zipreg.csv")
-#figure(tableq(csv1, 10, inset: 0.31em), caption: "ZIP 回归系数", kind: table)
+#figure(
+  tableq(csv1, 10, inset: 0.31em),
+  caption: "ZIP 回归系数",
+  kind: table,
+)
