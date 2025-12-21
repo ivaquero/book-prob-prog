@@ -20,7 +20,10 @@ $ "p-value" ≜ p(T_("sim") > T_("obs")|y) $
 
 若数据和模拟结果一致，我们应该期待一个$0.5$左右的 p 值，否则我们就存在一个有偏差的后验预测分布。
 
-#figure(image("images/bbap/bap-05-mean-iqr.png", width: 60%), caption: "p 值")
+#figure(
+  image("images/bbap/bap-05-mean-iqr.png", width: 60%),
+  caption: "p 值",
+)
 
 实际上，Bayes 的 p 值基本上和频率主义一样，但只是得到一个度量后验预测拟合度的数字的方法。即，得到的模拟统计量$T_("sim")$的概率等于或比数据中的统计量$T_("obs")$更极端。
 

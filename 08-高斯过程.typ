@@ -175,7 +175,10 @@ ax.plot(X, y, "ko")
 ax.set(xlabel="x", ylabel="f(x)")
 ```
 
-#figure(image("images/bbap/bap-08-gpreg.png", width: 45%), caption: "GP 回归")
+#figure(
+  image("images/bbap/bap-08-gpreg.png", width: 45%),
+  caption: "GP 回归",
+)
 
 另一种选择是，计算参数空间中给定点的条件分布的均值向量和标准差。这里使用 `gp.predict()` 来计算均值和方差。
 

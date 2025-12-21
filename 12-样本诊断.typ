@@ -134,7 +134,10 @@ $ R^2 = frac("Var"(𝔼[hat(y)^s]), "Var"(𝔼[hat(y)^s]) + "Var"(hat(y)^s - y))
 
 散度可能表明 NUTS 在后验中遇到了无法正确探索的高曲率区域；它告诉我们，抽样器可能遗漏了参数空间的某个区域，因此我们的结果会有偏差。散度通常比大多数测试敏感得多。散度的一个很好的特点是，它们往往出现在靠近有问题的参数空间区域，因此我们可用它们来识别问题的所在。一种可视化散度的方法是使用 `az.plot_pair(..., divergences =True)`。
 
-#figure(image("images/bbap/bap-10-divergence.png", width: 60%), caption: "散度")
+#figure(
+  image("images/bbap/bap-10-divergence.png", width: 60%),
+  caption: "散度",
+)
 
 上图中，小的点是常规样本，大的点代表散度。可以看到，中心模型的散度主要集中在漏斗的底端。非中心模型尖端比较尖锐。抽样器通过散度告诉我们，它很难从靠近漏斗尖的区域抽样。
 
@@ -177,11 +180,10 @@ $ R^2 = frac("Var"(𝔼[hat(y)^s]), "Var"(𝔼[hat(y)^s]) + "Var"(hat(y)^s - y))
 由 MLE
 
 $
-  hat(θ) = arg max_θ p(x|θ)
-  &= arg max_θ 1 / N sum_(i=1)^n log p(x_i|θ) \
-  &= arg max_θ ∫ p_("data") log p_("model") dd(x)\
-  &= arg max_θ ∫ p_("data") log p_("model") / p_("data") dd(x)\
-  &= arg min_θ "KL"(p_("data") || p_("model"))
+  hat(θ) = arg max_θ p(x|θ) & = arg max_θ 1 / N sum_(i=1)^n log p(x_i|θ) \
+                            & = arg max_θ ∫ p_("data") log p_("model") dd(x) \
+                            & = arg max_θ ∫ p_("data") log p_("model") / p_("data") dd(x) \
+                            & = arg min_θ "KL"(p_("data") || p_("model"))
 $
 
 对于 CD-k 的抽样过程，可表达为

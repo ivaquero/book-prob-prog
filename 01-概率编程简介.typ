@@ -99,7 +99,10 @@ $ p(θ|y) ∼ "Beta"(α_"prior" + y, β_"prior" + N - y) $
 
 一个常用的总结后验分布的方法是使用最高后验密度（highest posterior density，HPD），其对应的区间称最高密度区间（highest density interval，HDI），是包含给定部分概率密度的最短区间。其中最常用的是 95% 的 HDI。若我们说某项分析的 95% HDI 是$[2, 5]$，意味着根据我们的数据和模型，我们认为有关参数在$[2, 5]$之间的概率为 95% 。
 
-#figure(image("images/bbap/bap-01-coin-hdi.png", width: 40%), caption: "HPD")
+#figure(
+  image("images/bbap/bap-01-coin-hdi.png", width: 40%),
+  caption: "HPD",
+)
 
 #warning[
   请注意，HDI 区间不等于置信区间。
@@ -261,7 +264,7 @@ for i in grid:
 由于不知道均值或标准差，我们必须为它们设定先验。因此，一个合理的模型可能是：
 
 $
-     mu & ~ 𝒱(l, h)          \
+     mu & ~ 𝒱(l, h) \
   sigma & ~ ℋ 𝒩(sigma_sigma) \
       Y & ~ 𝒩(mu, sigma)
 $
@@ -278,7 +281,10 @@ with pm.Model() as model_g:
 
 我们可以使用#raw("az.plot_pair()", lang: "python", block: false)来查看二维后验分布以及$μ$和$σ$的边际分布。
 
-#figure(image("images/bbap/bap-02-chem-pair.png", width: 40%), caption: none)
+#figure(
+  image("images/bbap/bap-02-chem-pair.png", width: 40%),
+  caption: none,
+)
 
 == 后验概率检查
 

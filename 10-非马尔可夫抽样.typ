@@ -35,7 +35,10 @@ def posterior_grid(grid_points=50, heads=3, tails=10):
 
 很容易注意到，更多的点可得到更好的近似。网格方法最大的问题是，这种方法随着参数数量（维度）的增加而缩放性很差。随着维度增加，除了点的数量增加之外，参数空间中大部分后验集中的区域相比抽样量越来越小。这是统计学和机器学习中普遍存在的现象，通常被称为维度诅咒（curse of dimensionality），数学家更喜欢称之为度量集中（concentration of measure）。
 
-#figure(image("images/bbap/bap-10-grid.png", width: 40%), caption: "网格计算")
+#figure(
+  image("images/bbap/bap-10-grid.png", width: 40%),
+  caption: "网格计算",
+)
 
 #tip[
   维度诅咒被用于谈论各种只存在于高维空间中的现象。如
@@ -70,7 +73,9 @@ Laplace 法的局限性很大，但对于某些模型可很好地发挥作用，
 
 从概率角度来看推断，对于$hat(x)$这样的新样本，需要得到：
 
-$ p(hat(x)|X) = ∫_θ p(hat(x), θ|X) dd(θ) = ∫_θ p(θ|X) p(hat(x)|θ, X) dd(θ) $
+$
+  p(hat(x)|X) = ∫_θ p(hat(x), θ|X) dd(θ) = ∫_θ p(θ|X) p(hat(x)|θ, X) dd(θ)
+$
 
 若新样本和数据集独立，则推断就是概率分布依参数后验分布的期望。
 
@@ -85,24 +90,25 @@ $ p(hat(x)|X) = ∫_θ p(hat(x), θ|X) dd(θ) = ∫_θ p(θ|X) p(hat(x)|θ, X) d
 
 我们可使用 KL 散度来比较模型，这将给出哪个模型更接近真实分布的后验。由于不知道真实的分布，故 KL 散度不能直接应用。于是，我们使用 KL 散度的概率形式
 
-$ D_("KL")(q(θ) ∥ p(θ|y)) = ∫ q(θ) log frac(q(θ), p(θ|y)) d(θ) $
+$
+  D_("KL")(q(θ) ∥ p(θ|y)) = ∫ q(θ) log frac(q(θ), p(θ|y)) d(θ)
+$
 
 这里，$q$是较简单的分布，我们用它来逼近后验$p(θ|y)$，$q$通常被称为变分分布（variational distribution）。通过使用优化方法，我们试图找出$q$的参数（variational parameters），使$q$在 KL 散度方面尽可能地接近后验分布。
 
 上述表达式中，由于后验未知，仍不能直接使用它。此时，我们需要可用其定义替换条件分布
 
 $
-  D_("KL")(q(θ) ∥ p(θ|y))
-  &= ∫ q(θ) log (frac(q(θ), frac(p(θ, y), p(y)))) d(θ)\
-  &= ∫ q(θ) log (frac(q(θ), p(θ, y)) p(y)) d(θ) \
-  &= ∫ q(θ) log frac(q(θ), p(θ, y)) d(θ) + ∫ q(θ) log p(y) d(θ)
+  D_("KL")(q(θ) ∥ p(θ|y)) & = ∫ q(θ) log (frac(q(θ), frac(p(θ, y), p(y)))) d(θ) \
+                          & = ∫ q(θ) log (frac(q(θ), p(θ, y)) p(y)) d(θ) \
+                          & = ∫ q(θ) log frac(q(θ), p(θ, y)) d(θ) + ∫ q(θ) log p(y) d(θ)
 $
 
 其中，$q(θ)$的积分为 1，可将$log p(y)$从积分中移出，得
 
 $
-  D_("KL")(q(θ) ∥ p(θ|y)) &= ∫ q(θ) log frac(q(θ), p(θ, y)) d(θ) + log p(y) \
-  &= underbrace(-∫ q(θ) log frac(p(θ, y), q(θ)) d(θ), "evidence lower bound (ELBO)") + log p(y)
+  D_("KL")(q(θ) ∥ p(θ|y)) & = ∫ q(θ) log frac(q(θ), p(θ, y)) d(θ) + log p(y) \
+                          & = underbrace(-∫ q(θ) log frac(p(θ, y), q(θ)) d(θ), "evidence lower bound (ELBO)") + log p(y)
 $
 
 由于$D_("KL") ≥ 0$，则$log p(y) ≥ "ELBO"$，换句话说，证据（边际似然）总是 ≥ ELBO，这就是它名字的由来。又因为$log p(y)$是一个常数，我们只关注 ELBO。最大化 ELBO 相当于最小化 KL 散度。故，最大化 ELBO 是使$q(θ)$尽可能地接近后验$p(θ|y)$的方法。
