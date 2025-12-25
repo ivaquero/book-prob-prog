@@ -3,4 +3,6 @@
 #import "@preview/rexllent:0.4.0": xlsx-parser
 #import "@preview/physica:0.9.7": *
 
+#import "@preview/algo:0.3.6": algo, code, i
+
 #let info = toml("info.toml").prob-prog
