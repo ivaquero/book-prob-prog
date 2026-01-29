@@ -105,11 +105,13 @@ $ x_i = - α / β $
 = 鲁棒逻辑回归
 <鲁棒逻辑回归>
 
-逻辑回归中，我们可能会发现一个数据集有不寻常的$0$和/或$1$。在鸢尾数据集中增加一些入侵者。这里有一些 `versicolors` 的萼片长度特别短。我们用一个混合模型来解决这个问题。通过随机猜测，输出变量的概率为$π$，或是逻辑回归模型中的$1 - π$概率。在数学上有
+逻辑回归中，我们可能会发现一个数据集有不寻常的$0$和/或$1$。在鸢尾数据集中增加一些入侵者。这里有一些 `versicolors` 的萼片长度特别短。我们用一个混合模型来解决这个问题。通过随机猜测，输出变量的概率为$pi$，或是逻辑回归模型中的$1 - pi$概率。在数学上有
 
-$ p = π 0.5 + (1 - π) "logistic"(α + X β) $
+$
+  p = pi 0.5 + (1 - pi) "logistic"(α + X β)
+$
 
-当$π = 1$时，$p = 0.5$，当$π = 0$时，则恢复逻辑回归的表达式。对应代码如下
+当$pi = 1$时，$p = 0.5$，当$pi = 0$时，则恢复逻辑回归的表达式。对应代码如下
 
 ```python
 y_0r = np.concatenate((y_0, np.ones(6, dtype=int)))
@@ -122,8 +124,8 @@ with pm.Model() as model_rlg:
     μ_lrr = α_lrr + x_cr * β_lrr
     θ_lrr = pm.Deterministic("θ", pm.math.sigmoid(μ_lrr))
     bd_lrr = pm.Deterministic("bd", -α_lrr / β_lrr)
-    π_lrr = pm.Beta("π", 1.0, 1.0)
-    p_lrr = π_lrr * 0.5 + (1 - π_lrr) * θ_lrr
+    pi_lrr = pm.Beta("π", 1.0, 1.0)
+    p_lrr = pi_lrr * 0.5 + (1 - pi_lrr) * θ_lrr
     yl_lrr = pm.Bernoulli("yl", p=p_lrr, observed=y_0r)
 
     idata_rlg = pm.sample(random_seed=123)

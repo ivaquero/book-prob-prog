@@ -96,7 +96,9 @@ $ - 2 sum log p(y_i|θ) $
 
 AIC（Akaike information criterion）是一个非常著名的、被广泛使用的信息标准
 
-$ "AIC" = -2 sum log p(y_i|hat(θ)_("MLE")) + 2k $
+$
+  "AIC" = -2 sum log p(y_i|hat(θ)_("MLE")) + 2k
+$
 
 其中，$k$是参数的数量。对于 Non-Bayesian 来说，MLE 是一种常见的做法，当使用扁平先验时，相当于 MAP 估计。$-2$的存在是历史原因。
 
@@ -104,7 +106,9 @@ $ "AIC" = -2 sum log p(y_i|hat(θ)_("MLE")) + 2k $
 
 另一种信息标准是 BIC（Bayesian information criterion），它类似于逻辑回归，其定义为
 
-$ "BIC" = -2 sum log p(y_i|hat(θ)_("MLE")) + k ln(N) $
+$
+  "BIC" = -2 sum log p(y_i|hat(θ)_("MLE")) + k ln(N)
+$
 
 其中，$N$为数据量。BIC 的名字可能会让人误解，其提出是为了纠正 AIC 的一些问题。BIC 并非真正的 Bayesian，事实上和 AIC 很相似。它亦假设扁平先验，并使用 MLE。
 
@@ -112,7 +116,9 @@ $ "BIC" = -2 sum log p(y_i|hat(θ)_("MLE")) + k ln(N) $
 
 WAIC（Watanabe–Akaike information criterion）是完全 Bayesian 的 AIC。与 AIC 一样，WAIC 有 2 项：拟合程度和惩罚，其定义为
 
-$ "WAIC" = -2 * "LPPD" + 2 * p_("WAIC") $
+$
+  "WAIC" = -2 * "LPPD" + 2 * p_("WAIC")
+$
 
 展开得
 
