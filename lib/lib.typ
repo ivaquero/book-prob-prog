@@ -6,3 +6,5 @@
 #import "@preview/algo:0.3.6": algo, code, i
 
 #let info = toml("info.toml").prob-prog
+
+#let bib = bibliography("prob.bib", style: "future-science")

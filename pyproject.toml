@@ -59,7 +59,7 @@ ignore = [
   "F405",
   "RUF001",  # string contains ambiguous character (such as greek letters)
   "RUF002",  # docstring contains ambiguous character (such as greek letters)
-  "RUF003",
+  "RUF003",  # string contains non-ASCII character
 ]
 unfixable = []
 
