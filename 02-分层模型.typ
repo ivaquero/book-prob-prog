@@ -280,4 +280,4 @@ $
 
 $ Y ∼ X + B + C $
 
-#bibliography("lib/prob.bib", style: "future-science")
+#bibx(bib)

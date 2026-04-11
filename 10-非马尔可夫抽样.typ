@@ -12,7 +12,7 @@ Bayesian 方法虽然在概念上很简单，但在数学和数值上却极具�
 
 网格计算（grid computing）是一种简单粗暴的方法。即使我们无法计算整个后验，我们也可能能够计算出先验和似然点。
 
-#algo[
+#algo(line-numbers: false)[
   设计算一个单参数模型的后验，网格逼近（grid approximation）的步骤如下：
 
   + 为参数定义一个合理的区间
@@ -54,7 +54,7 @@ def posterior_grid(grid_points=50, heads=3, tails=10):
 
 Laplace 方法（quadratic approximation）也被称为二次逼近或正态逼近，包括用 Gaussian 分布$q(x)$来近似后验$p(x)$。
 
-#algo[
+#algo(line-numbers: false)[
   二次近似包括 2 个步骤：
   + 找到后验分布的模式，这将是$q(x)$的均值
   + 计算 Hessian 矩阵，由此可计算出$q(x)$的标准差
@@ -125,7 +125,7 @@ $ q(θ) = product_j q_j (θ_j) $
 
 MFA 的主要缺点是，我们必须为每个模型提出一个特定的算法。我们没有一个通用推理引擎的配方。不过，最近提出一些技术可以部分解决这个问题。其中一种是自动微分变分推理（Automatic Differentiation Variational Inference，ADVI）。
 
-#algo[
+#algo(line-numbers: false)[
   ADVI 的主要步骤是：
   + 变换所有的有界分布，使它们在实线上生存，就像二次逼近一样
   + 用 Gaussian 分布来逼近无界参数；注意到在变换后的参数空间上的 Gaussian 是在原始参数空间上的非 Gaussian

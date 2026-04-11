@@ -52,7 +52,7 @@ $ T_j - T_(j - 1) ∼ "Expo"(λ) $
 
 $ T_j ∼ "Gamma"(j, λ) $
 
-#algo[
+#algo(line-numbers: false)[
   从速率为$λ$的 PP 在$(0, ∞)$中生成$n$个到达：
 
   + 生成$n$个随机变量$X_1, …, X_n limits(∼)^("i.i.d") "Expo"(λ)$
@@ -89,7 +89,7 @@ PP 有 3 个最重要的性质，即条件性（conditioning）、叠加性（su
 
 $ t^(-1) T_j|N(t) = n ∼ "Beta" (j, n - j + 1) $
 
-#algo[
+#algo(line-numbers: false)[
   从速率为$λ$的 PP 在$(0, t\]$中生成$n$个到达：
   + 生成区间内的事件总数$N(t) ∼ "Pois"(λ t)$
   + 给定$N(t) = n$，生成$n$个随机变量$U_1, …, U_n limits(∼)^("i.i.d") "Unif"(0, t)$
@@ -104,7 +104,7 @@ $ t^(-1) T_j|N(t) = n ∼ "Beta" (j, n - j + 1) $
   设$(N_1(t): t > 0)$和$(N_2(t): t > 0)$分别是速率为$λ_1$和$λ_2$的独立 PP。那么组合过程$N(t) = N_1(t) + N_2(t)$是一个速率为$λ_1 + λ_2$的 PP。
 ]
 
-#algo[
+#algo(line-numbers: false)[
   生成速率为$λ_1$的独立 PP $(N_1(t): t > 0)$和速率为$λ_2$的独立 PP $(N_2(t): t > 0)$的叠加：
   + 生成 PP $(N_1(t): t > 0)$的到达
   + 生成 PP $(N_2(t): t > 0)$的到达
@@ -116,7 +116,7 @@ $ t^(-1) T_j|N(t) = n ∼ "Beta" (j, n - j + 1) $
   $λ_1 / (λ_1 + λ_2)$。
 ]
 
-#algo[
+#algo(line-numbers: false)[
   生成速率为$λ_1$和$λ_2$的 2 个独立 PP 的叠加：
 
   + 生成$X_1, X_2, … limits(∼)^("i.i.d") "Expo"(λ_1 + λ_2)$的随机变量，，并令第$j$个到达时间为$T_j = X_1 + … + X_j$
