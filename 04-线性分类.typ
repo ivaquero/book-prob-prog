@@ -142,7 +142,6 @@ with pm.Model() as model_rlg:
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "鲁棒逻辑回归的系数",
-  kind: table,
 )
 
 = 多元逻辑回归
@@ -206,7 +205,6 @@ $ log frac(p(y=1), 1 - p(y=1)) = α + X β $
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "多元逻辑回归的系数估计",
-  kind: table,
 )
 
 == 处理关联变量
@@ -276,7 +274,6 @@ $
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "多元线性回归的R²",
-  kind: table,
 )
 
 ```python
@@ -401,7 +398,6 @@ $ θ = e^((α + 𝑿 β)) $
 #figure(
   tableq(csv1.slice(0, 5), 8, inset: 0.31em),
   caption: "Fish 数据集",
-  kind: table,
 )
 
 #tip[
@@ -428,5 +424,4 @@ with pm.Model() as ZIP_reg:
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "ZIP 回归系数",
-  kind: table,
 )

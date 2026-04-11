@@ -17,7 +17,6 @@
   tableq(data.slice(0, 6), 7),
   caption: "tips 数据集",
   supplement: [表],
-  kind: table,
 )\
 
 首先，我们使用#raw("az.plot_forest()", lang: "python", block: false) 对每天的小费金额可视化。然后对这 4 天进行编码。
@@ -187,7 +186,6 @@ _axes[0].vlines(
   tableq(data.slice(0, 6), 4),
   caption: "足球运动员数据集",
   supplement: [表],
-  kind: table,
 )\
 
 我们收集了4年间（2017 年至 2020 年）英超、法甲、德甲、意甲和西甲的数据。假设我们对射门进球数指标感兴趣，我们可用二项式模型来估计它，其中参数$n$是射门次数，观测值$y$是进球数。这给我们留下了一个未知的$p$值。我们用$θ$表示每个球员的成功率，它是一个大小为`n_players`的向量，我们现在使用 Beta 分布对其进行建模。

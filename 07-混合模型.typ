@@ -75,7 +75,6 @@ az.plot_trace(idata_mg, ["means", "p"])
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "混合模型的抽样统计",
-  kind: table,
 )
 
 == 不可识别型
@@ -108,7 +107,6 @@ with pm.Model() as model_mgp:
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "混合模型均值排序后的统计",
-  kind: table,
 )
 
 另一个可能有用的约束条件是确保所有的组分都有 1 个非空概率，或换句话说，混合中的每个组分至少有 1 个观测值。
@@ -135,7 +133,6 @@ with pm.Model() as model_mgp:
 #figure(
   tableq(csv1, 10, inset: 0.31em),
   caption: "不同组分数混合模型的比较",
-  kind: table,
 )
 
 可看到$K = 6$是一个很好的选择，其 Bayesian 的$p ≈ 0.5$。而 WAIC 也发现$K = 6$是更好的模型。

@@ -212,7 +212,6 @@ az.plot_bf(idata_coin, ref_val=0.5, var_name="θ", prior=np.random.uniform(0, 1,
   tableq(data, 2),
   caption: "Bayes 因子的表述",
   supplement: [表],
-  kind: table,
 )
 
 == 损失函数

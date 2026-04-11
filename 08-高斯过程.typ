@@ -214,7 +214,6 @@ ax.set(xlabel="X")
 #figure(
   tableq(csv1.slice(0, 5), 11, inset: 0.31em),
   caption: "地理距离",
-  kind: table,
 )
 
 我们的模型可描述为
@@ -265,7 +264,6 @@ with pm.Model() as model_islands:
 #figure(
   tableq(csv1.slice(0, 5), 11, inset: 0.31em),
   caption: "距离相关矩阵",
-  kind: table,
 )
 
 现在我们要利用经纬度信息来绘制岛屿 - 社会的相对位置。左图显示了在相对地理位置的背景下计算的社会之间的后验中位数相关性的线条。有些线条不可见，因为我们已经使用相关性来设置线条的不透明度。右图中，显示了后验中位数的相关性。虚线代表 `total-tools` 的中位数和 HPD 94% 区间作为对数人口的函数。两图中，点的大小与每个岛屿社会的人口成正比。
