@@ -315,11 +315,11 @@ $
 
 #sgrid(
   figure(
-    image("images/distrs/distr_laplace_pdf.png", width: 90%),
+    image("images/distrib/distrib_laplace_pdf.png", width: 90%),
     caption: "PDF",
   ),
   figure(
-    image("images/distrs/distr_laplace_cdf.png", width: 90%),
+    image("images/distrib/distrib_laplace_cdf.png", width: 90%),
     caption: "CDF",
   ),
   columns: (200pt,) * 2,

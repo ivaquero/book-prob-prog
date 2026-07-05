@@ -21,7 +21,7 @@ $ p(y|θ) = sum_(i=1)^k w_i p_i (y|θ_i) $
 这里我们需要先来认识两种需要用到的分布。首先是类别分布，其为Bernoulli 分布对$K$-组分的泛化，其次是 Dirichlet 分布，它是 Beta 分布的泛化。类别分布是最一般的离散分布，它使用 1 个参数来指定每个可能结果的概率，其参数$θ$的和为$1$。
 
 #figure(
-  image("images/distrs/distr_categ_pmf.png", width: 30%),
+  image("images/distrib/distrib_categ_pmf.png", width: 30%),
   caption: "类别分布",
 )
 Dirichlet 分布存在于单纯形（simplex）中，满足

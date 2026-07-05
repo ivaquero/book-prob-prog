@@ -199,7 +199,7 @@ with pm.Model() as model_neg:
 在处理离群值和 Gaussian 分布时，一个非常有用的选择是用 t 似然代替正态似然。该分布有 3 个参数：均值、标度和自由度。自由度通常使用字母$ν$，可在$[0, ∞]$的内变化，也称为正态性参数（normality parameter）。t 分布的一个的特征是，该分布的方差只对$ν > 2$进行定义。要注意 t 分布的标度与标准差不一样，当接近无穷大时，标度近似于标准差。
 
 #figure(
-  image("images/distrs/distr_t.png", width: 45%),
+  image("images/distrib/distrib_t.png", width: 45%),
   caption: "t 分布",
 )
 

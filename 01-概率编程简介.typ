@@ -45,11 +45,11 @@ $ p(θ) = frac(Γ(α + β), Γ(α) Γ(β)) θ^(α - 1)(1 - θ)^(β - 1) $
 
 #sgrid(
   figure(
-    image("images/distrs/distr_bin_pmf.png", width: 90%),
+    image("images/distrib/distrib_bin_pmf.png", width: 90%),
     caption: "二项分布",
   ),
   figure(
-    image("images/distrs/distr_beta_pdf.png", width: 90%),
+    image("images/distrib/distrib_beta_pdf.png", width: 90%),
     caption: "Beta 分布",
   ),
   columns: (200pt,) * 2,
