@@ -4,7 +4,10 @@
 # Thumbnails
 ._*
 
+.workbuddy
+.tmp
 articles
 tmp
 images
+
 test.*
